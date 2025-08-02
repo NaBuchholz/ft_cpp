@@ -50,3 +50,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#Executables from exercises
+./CPP00/ex00/megaphone
