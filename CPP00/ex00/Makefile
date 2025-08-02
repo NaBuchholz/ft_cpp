@@ -30,7 +30,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJS)
+	@rm -rf $(OBJDIR)
 	@echo "$(RED)Objects removed$(RESET)"
 
 fclean: clean
