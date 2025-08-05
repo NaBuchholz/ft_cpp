@@ -2,7 +2,7 @@
 #define ZOMBIE_HPP
 
 #include <iostream>
-
+#include <string>
 class Zombie
 {
 	private:
@@ -11,20 +11,11 @@ class Zombie
 		Zombie(const std::string& name);
 		~Zombie();
 
-		void announce( void ){
-			std::cout << getName() << " : BraiiiiiiinnnzzzZ..." << std::endl;
-		}
-
-		void setName(const std::string& zombieName){
-			name = zombieName;
-		};
-
-		std::string getName(){
-			return name;
-		};
+		void announce( void );
+		std::string getName() const;
 };
 
 
-Zombie* newZombie( std::string name );
+Zombie* newZombie( const std::string& name );
 
 #endif
