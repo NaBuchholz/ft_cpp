@@ -1,20 +1,33 @@
 NAME = brainz
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I.
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes
 
-HPP = Zimbie.hpp
-OBJDIR = build
 SRCDIR = src
+OBJDIR = build
+INCDIR = includes
+SRC = $(SRCDIR)/main.cpp \
+      $(SRCDIR)/newZombie.cpp \
+      $(SRCDIR)/randomChump.cpp \
+      $(SRCDIR)/zombie.cpp
+OBJ = $(SRC:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
+HPP = $(INCDIR)/Zombie.hpp
 
-all: ${NAME}
+all: $(NAME)
 
-$(NAME): $(SRC) $(HPP)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(SRCDIR)
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HPP) | $(OBJDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(NAME)
+	@rm -rf $(OBJDIR)
 
 fclean: clean
+	@rm -f $(NAME)
 
 re: fclean all
 
