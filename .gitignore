@@ -55,3 +55,4 @@ dkms.conf
 #Executables from exercises
 CPP00/ex00/megaphone
 CPP01/ex00/brainz
+CPP01/ex01/horde
