@@ -1,4 +1,4 @@
-NAME = brainz
+NAME = horde
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes
 
@@ -6,10 +6,9 @@ SRCDIR = src
 OBJDIR = build
 INCDIR = includes
 SRC = $(SRCDIR)/main.cpp \
-      $(SRCDIR)/newZombie.cpp \
-      $(SRCDIR)/zombie.cpp
+      $(SRCDIR)/zombie.cpp \
+      $(SRCDIR)/zombieHorde.cpp 
 OBJ = $(SRC:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
-HPP = $(INCDIR)/Zombie.hpp
 
 all: $(NAME)
 
