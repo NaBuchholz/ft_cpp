@@ -8,7 +8,7 @@ Zombie* zombieHorde( int N, std::string name ){
 	while (i < N)
 	{
 		horde[i].setName(name);
-		std::cout << "Zombie " << name << " is the index " << i++ << std::endl;
+		i++;
 	}
 	return (horde);
 };

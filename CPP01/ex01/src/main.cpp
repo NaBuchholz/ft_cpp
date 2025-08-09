@@ -2,16 +2,20 @@
 
 int main()
 {
-	std::cout << "========= Before randomChump (Stack)========" << std::endl;
-	Zombie zombieStack("Stack Zombie");
-	zombieStack.announce();
-	std::cout << "====== After randomChump ==========" << std::endl;
+	Zombie* horde;
+	int i;
 
-	std::cout << "====== Before newZombie (Heap) ==========" << std::endl;
-	Zombie* zombieHeap = new Zombie("Heap Zombie");
-	zombieHeap->announce();
-	std::cout << zombieHeap->getName() << ": deleting from heap..." << std::endl;
-	delete zombieHeap;
-	std::cout << "====== After newZombie (Heap) ==========" << std::endl;
+	i = 0;
+	std::cout << "========= Creating Horde manually ===========" << std::endl;
+	horde = zombieHorde(5, "enzo");
+	std::cout << "========= Announcing Horde manually ===========" << std::endl;
+	while(i < 5)
+	{	
+		horde[i].announce();
+		std::cout << horde[i].getName() << " is index " << i << std::endl;
+		i++;
+	}
+	std::cout << "========= Deleting Horde manually ===========" << std::endl;
+	delete[] horde;
 	return (0);
 }
