@@ -1,5 +1,8 @@
-int main(int argc, char const *argv[])
+#include "PhoneBook.hpp"
+
+int main()
 {
-    
-    return 0;
+	PhoneBook phonebook;
+	phonebook.run();
+	return (0);
 }

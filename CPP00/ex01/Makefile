@@ -1,43 +1,34 @@
 NAME = phonebook
+
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes
+
 SRCDIR = src
-OBJDIR = build
 INCDIR = includes
+BUILDDIR = build
+SOURCES = main.cpp \
+		  PhoneBook.cpp \
+		  Contact.cpp
 
-# COLORS
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
-RED = \033[0;31m
-BLUE = \033[0;34m
-PURPLE = \033[0;35m
-CYAN = \033[0;36m
-RESET = \033[0m
+OBJECTS = $(SOURCES:%.cpp=$(BUILDDIR)/%.o)
 
-SRCS = main.cpp PhoneBook.cpp Contact.cpp
-OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
-HEADERS = $(INCDIR)/PhoneBook.hpp $(INCDIR)/Contact.hpp
+all: $(NAME)
 
-all: $(OBJDIR) $(NAME)
+$(NAME): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp | $(BUILDDIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HEADERS)
-	$(CXX) $(CXXFLAGS) -I$(INCDIR) -c $< -o $@
+$(BUILDDIR):
+	mkdir -p $(BUILDDIR)
 
 clean:
-	@rm -rf $(OBJDIR)
-	@echo "$(RED)Objects removed$(RESET)"
+	rm -rf $(BUILDDIR)
 
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(RED)Executable $(NAME) removed$(RESET)"
+	rm -f $(NAME)
 
 re: fclean all
-	@echo "$(CYAN)Recompiled Exercise!$(RESET)"
 
 .PHONY: all clean fclean re
