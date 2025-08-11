@@ -1,19 +1,25 @@
-NAME = sed_is_for_losers
-SRCS = main.cpp
-OBJS = $(SRCS:.cpp=.o)
+NAME = harl
+
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
+SRCDIR = .
+OBJDIR = obj
+
+SOURCES = main.cpp Harl.cpp
+OBJECTS = $(SOURCES:%.cpp=$(OBJDIR)/%.o)
+
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(NAME)
 
-%.o: %.cpp
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	@mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)
