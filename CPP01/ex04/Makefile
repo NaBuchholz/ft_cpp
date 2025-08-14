@@ -1,32 +1,22 @@
-NAME = violence
+NAME = sed_is_for_losers
+SRCS = main.cpp
+OBJS = $(SRCS:.cpp=.o)
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes
-
-SRCDIR = src
-OBJDIR = build
-INCDIR = includes
-SRC = $(SRCDIR)/main.cpp \
-	  $(SRCDIR)/HumanA.cpp \
-	  $(SRCDIR)/HumanB.cpp \
-	  $(SRCDIR)/Weapon.cpp 
-OBJ = $(SRC:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HPP) | $(OBJDIR)
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJDIR)
+	rm -f $(OBJS)
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
